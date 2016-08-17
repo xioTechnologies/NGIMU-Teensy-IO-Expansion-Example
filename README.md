@@ -33,3 +33,5 @@ Teensy board connections
 * A0 - Joystick HORZ
 * A1 - Joystick VERT
 * 16 - Joystick SEL
+
+![](https://github.com/xioTechnologies/NGIMU-Teensy-IO-Expansion-Example/blob/master/Example%20Setup.jpg)
