@@ -114,7 +114,7 @@ static OscError ProcesAddress(OscMessage * const oscMessage) {
         }
 
         // Write to pin
-        pinMode(13, OUTPUT);
+        pinMode(13, OUTPUT); // Teensy LED connected to pin 13
         digitalWrite(13, ledState);
 
         return OscErrorNone;
@@ -131,10 +131,10 @@ static OscError ProcesAddress(OscMessage * const oscMessage) {
         }
 
         // Write to pin
-        if (frequency == 0) {
-            noTone(9);
+        if (frequency > 0) {
+            tone(9, frequency); // piezo transducer connected to pin 9
         } else {
-            tone(9, frequency);
+            noTone(9);
         }
 
         return OscErrorNone;

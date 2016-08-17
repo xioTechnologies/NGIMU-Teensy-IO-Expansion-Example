@@ -5,7 +5,7 @@ This is an example project demonstrating how a Teensy can be used with the NGIMU
 
 This example is intended to serve as a template for user projects.  In most cases, only the `Receive.cpp` and `Send.cpp` files need to be modified.  The auxiliary serial baud rate can be increased in the NGIMU settings and `setup()` function in the `NGIMU-Teensy-IO-Expansion-Example.ino` to achieve higher throughput and lower latency.
 
-OSC messages send by the Teensy
+OSC messages sent by the Teensy
 -------------------------------
 * `/teensy/joystick/xy` - Contains the analogue joystick x and y values.  Sent continuously at 10 Hz.
 * `/teensy/joystick/button` - Contains no arguments.  Sent each time the joystick button is pressed.
@@ -17,8 +17,8 @@ OSC messages send by the Teensy
 
 OSC messages received by the Teensy
 -----------------------------------
-* `/led` - Contains one value to turn the Teensy on-board LED on/off.
-* `/tone` - Contains one value to set the frequency the piezo transducer
+* `/teensy/led` - Contains one value to turn the Teensy on-board LED on/off.
+* `/teensy/tone` - Contains one value to set the frequency the piezo transducer
 
 Teensy board connections
 ------------------------
