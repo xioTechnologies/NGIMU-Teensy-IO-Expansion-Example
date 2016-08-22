@@ -17,7 +17,6 @@
 // Function prototypes
 
 static void SendJoystickXYMessage();
-static void SendJoystickButton();
 static void SendCounterMessage();
 static void SendButtonAMessage();
 static void SendButtonBMessage();
@@ -39,7 +38,6 @@ void SendInitialise() {
     EventSchedulerAddEvent(&SendCounterMessage, 1.0f); // send counter at 1 Hz
 
     // Configure triggered events
-    EventTriggerAddEvent(&SendJoystickButton, 16); // send joystick button message with each falling edge of pin 16
     EventTriggerAddEvent(&SendButtonAMessage, 10); // send button A message with each falling edge of pin 10
     EventTriggerAddEvent(&SendButtonBMessage, 11); // send button B message with each falling edge of pin 11
     EventTriggerAddEvent(&SendButtonCMessage, 12); // send button C message with each falling edge of pin 12
@@ -97,15 +95,6 @@ static void SendCounterMessage() {
     OscMessage oscMessage;
     OscMessageInitialise(&oscMessage, "/teensy/counter");
     OscMessageAddInt32(&oscMessage, counter++); // increment counter
-    SendOscContents(&oscMessage);
-}
-
-/**
- * @brief Sends joystick button message.
- */
-static void SendJoystickButton() {
-    OscMessage oscMessage;
-    OscMessageInitialise(&oscMessage, "/teensy/joystick/button");
     SendOscContents(&oscMessage);
 }
 

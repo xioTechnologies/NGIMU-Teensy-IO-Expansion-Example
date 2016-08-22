@@ -13,7 +13,7 @@ OSC messages sent by the Teensy
 * `/teensy/button/a` - Contains no arguments.  Sent each time button A is pressed.
 * `/teensy/button/b` - Contains no arguments.  Sent each time button B is pressed.
 * `/teensy/button/b` - Contains no arguments.  Sent each time button C is pressed.
-* `/error` - Contains an error message string argument.  Sent if invalid OSC packet is received by the Teensy.
+* `/error` - Contains an error message string argument.  Sent if invalid an OSC packet is received by the Teensy.
 
 OSC messages received by the Teensy
 -----------------------------------
