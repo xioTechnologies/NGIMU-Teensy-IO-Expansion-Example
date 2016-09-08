@@ -18,9 +18,9 @@
 
 static void SendJoystickXYMessage();
 static void SendCounterMessage();
-static void SendButtonAMessage();
-static void SendButtonBMessage();
-static void SendButtonCMessage();
+static void SendButtonAMessage(const bool pinState);
+static void SendButtonBMessage(const bool pinState);
+static void SendButtonCMessage(const bool pinState);
 void SendError(const char* const errorMessage);
 static void SendOscContents(OscContents* oscContents);
 
@@ -100,28 +100,34 @@ static void SendCounterMessage() {
 
 /**
  * @brief Sends button A message.
+ * @param pinState Pin state.
  */
-static void SendButtonAMessage() {
+static void SendButtonAMessage(const bool pinState) {
     OscMessage oscMessage;
     OscMessageInitialise(&oscMessage, "/teensy/button/a");
+	OscMessageAddBool(&oscMessage, pinState);
     SendOscContents(&oscMessage);
 }
 
 /**
  * @brief Sends button B message.
+ * @param pinState Pin state.
  */
-static void SendButtonBMessage() {
+static void SendButtonBMessage(const bool pinState) {
     OscMessage oscMessage;
     OscMessageInitialise(&oscMessage, "/teensy/button/b");
+	OscMessageAddBool(&oscMessage, pinState);
     SendOscContents(&oscMessage);
 }
 
 /**
  * @brief Sends button C message.
+ * @param pinState Pin state.
  */
-static void SendButtonCMessage() {
+static void SendButtonCMessage(const bool pinState) {
     OscMessage oscMessage;
     OscMessageInitialise(&oscMessage, "/teensy/button/c");
+	OscMessageAddBool(&oscMessage, pinState);
     SendOscContents(&oscMessage);
 }
 

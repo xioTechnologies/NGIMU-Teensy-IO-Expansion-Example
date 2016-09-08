@@ -7,11 +7,11 @@ This example is intended to serve as a template for user projects.  In most case
 
 OSC messages sent by the Teensy
 -------------------------------
-* `/teensy/joystick/xy` - Contains the analogue joystick x and y values.  Sent continuously at 10 Hz.
-* `/teensy/counter` - Contains a counter value that increments each time the message is sent.  Sent continuously at 1 Hz.
-* `/teensy/button/a` - Contains no arguments.  Sent each time button A is pressed.
-* `/teensy/button/b` - Contains no arguments.  Sent each time button B is pressed.
-* `/teensy/button/b` - Contains no arguments.  Sent each time button C is pressed.
+* `/teensy/joystick/xy` - Contains the analogue joystick x and y values (float32).  Sent continuously at 10 Hz.
+* `/teensy/counter` - Contains a counter value (int32) that increments each time the message is sent.  Sent continuously at 1 Hz.
+* `/teensy/button/a` - Contains pin state (boolean).  Sent each time button A is pressed or released.
+* `/teensy/button/b` - Contains pin state (boolean).  Sent each time button B is pressed or released.
+* `/teensy/button/b` - Contains pin state (boolean).  Sent each time button C is pressed or released.
 * `/error` - Contains an error message string argument.  Sent if invalid an OSC packet is received by the Teensy.
 
 OSC messages received by the Teensy

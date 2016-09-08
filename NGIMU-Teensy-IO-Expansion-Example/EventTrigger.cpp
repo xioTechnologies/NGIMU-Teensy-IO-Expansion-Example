@@ -1,7 +1,7 @@
 /**
  * @file EventTrigger.cpp
  * @author Seb Madgwick
- * @brief Triggers events on each digital input falling edge.
+ * @brief Triggers events on each digital input rising and falling edge.
  */
 
 //------------------------------------------------------------------------------
@@ -21,9 +21,9 @@
  * @brief Structure of trigger event variables.
  */
 typedef struct {
-    void (*function)();
+    void (*function)(const bool pinState);
     int pinNumber;
-    unsigned long previousMicros;
+    bool prevousPinState;
 } TriggerEvent;
 
 //------------------------------------------------------------------------------
@@ -48,25 +48,31 @@ static int numberOfTriggerEvents = 0;
  * program loop.
  */
 void EventTriggerDoTasks() {
-    unsigned long currentMicros = micros();
     int i;
     for (i = 0; i < numberOfTriggerEvents; i++) {
-        if (digitalRead(triggerEvents[i].pinNumber) == 0) {
-            if (currentMicros >= (triggerEvents[i].previousMicros + 10000)) { // button must be released for 10 ms before being pressed again
-                triggerEvents[i].function();
+		const bool pinState = digitalRead(triggerEvents[i].pinNumber) == 1;
+        if (pinState == false) {
+            if (triggerEvents[i].prevousPinState == true) {
+                triggerEvents[i].function(pinState);
             }
-            triggerEvents[i].previousMicros = currentMicros;
         }
+		else {
+            if (triggerEvents[i].prevousPinState == false) {
+                triggerEvents[i].function(pinState);
+            }
+		}
+		triggerEvents[i].prevousPinState = pinState;
     }
 }
 
 /**
- * @brief Adds new event to be triggered for each input pin falling edge.  This
- * function will also configure pin as an input with internal pull-up.
+ * @brief Adds new event to be triggered for each input pin rising and falling
+ * edge.  This function will also configure pin as an input with internal pull-
+ * up.
  * @param function Address of function to be triggered by input falling edge.
  * @param pinNumber Pin number to be configured as a digital input.
  */
-void EventTriggerAddEvent(void (*const function) (), const int pinNumber) {
+void EventTriggerAddEvent(void (*const function) (const bool pinState), const int pinNumber){
     if (numberOfTriggerEvents >= MAX_NUMBER_OF_TRIGGER_EVENTS) {
         return; // error: cannot exceed maximum number of trigger events
     }
