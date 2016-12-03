@@ -50,18 +50,18 @@ static int numberOfTriggerEvents = 0;
 void EventTriggerDoTasks() {
     int i;
     for (i = 0; i < numberOfTriggerEvents; i++) {
-		const bool pinState = digitalRead(triggerEvents[i].pinNumber) == 1;
+        const bool pinState = digitalRead(triggerEvents[i].pinNumber) == 1;
         if (pinState == false) {
             if (triggerEvents[i].prevousPinState == true) {
                 triggerEvents[i].function(pinState);
             }
         }
-		else {
+        else {
             if (triggerEvents[i].prevousPinState == false) {
                 triggerEvents[i].function(pinState);
             }
-		}
-		triggerEvents[i].prevousPinState = pinState;
+        }
+        triggerEvents[i].prevousPinState = pinState;
     }
 }
 

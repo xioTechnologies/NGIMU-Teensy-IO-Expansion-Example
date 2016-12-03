@@ -51,7 +51,7 @@ void EventSchedulerDoTasks() {
     unsigned long currentMicros = micros();
     int i;
     for (i = 0; i < numberOfSchduledEvents; i++) {
-        if (currentMicros - scheduledEvents[i].previousMicros >= scheduledEvents[i].repeatInterval) {
+        if ((currentMicros - scheduledEvents[i].previousMicros) >= scheduledEvents[i].repeatInterval) {
             scheduledEvents[i].function();
             scheduledEvents[i].previousMicros = currentMicros;
         }
