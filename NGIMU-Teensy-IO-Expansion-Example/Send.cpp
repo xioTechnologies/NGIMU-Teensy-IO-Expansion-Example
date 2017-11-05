@@ -22,7 +22,7 @@ static void SendButtonAMessage(const bool pinState);
 static void SendButtonBMessage(const bool pinState);
 static void SendButtonCMessage(const bool pinState);
 void SendError(const char* const errorMessage);
-static void SendOscContents(OscContents* oscContents);
+static void SendOscContents(const void* const oscContents);
 
 //------------------------------------------------------------------------------
 // Functions
@@ -145,9 +145,9 @@ void SendError(const char* const errorMessage) {
 /**
  * @brief Sends either an OSC message or OSC bundle through both serial
  * peripherals.
- * @param oscContents Address of either an OSC message or OSC bundle.
+ * @param oscContents OSC message or OSC bundle.
  */
-static void SendOscContents(OscContents* oscContents) {
+static void SendOscContents(const void* const oscContents) {
 
     // Create OSC packet from OSC message or bundle
     OscPacket oscPacket;

@@ -26,7 +26,7 @@ static OscSlipDecoder oscSlipDecoderSerial;
 
 static void ProcessPacket(OscPacket * const oscMessage);
 static void ProcessMessage(const OscTimeTag * const oscTimeTag, OscMessage * const oscMessage);
-static OscError ProcesAddress(OscMessage * const oscMessage);
+static OscError ProcessAddress(OscMessage * const oscMessage);
 
 //------------------------------------------------------------------------------
 // Functions
@@ -79,7 +79,7 @@ static void ProcessPacket(OscPacket * const oscPacket) {
  * @param oscMessage Address of OSC message.
  */
 static void ProcessMessage(const OscTimeTag * const oscTimeTag, OscMessage * const oscMessage) {
-    const OscError oscError = ProcesAddress(oscMessage);
+    const OscError oscError = ProcessAddress(oscMessage);
     if (oscError != OscErrorNone) {
         SendError(OscErrorGetMessage(oscError)); // send error message
     }
@@ -90,7 +90,7 @@ static void ProcessMessage(const OscTimeTag * const oscTimeTag, OscMessage * con
  * @param oscMessage Address of OSC message.
  * @return Error code (0 if successful).
  */
-static OscError ProcesAddress(OscMessage * const oscMessage) {
+static OscError ProcessAddress(OscMessage * const oscMessage) {
 
     // Reject non-literal OSC address patterns
     if (!OscAddressIsLiteral(oscMessage->oscAddressPattern)) {
